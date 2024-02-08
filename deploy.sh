@@ -2,8 +2,8 @@ branch=$(git symbolic-ref --short HEAD)
 
 git checkout --orphan deploy
 
-npm install
-npm run build
+sudo npm install --force
+sudo npm run build
 
 # include /dist in the commit
 rm -rf .gitignore
