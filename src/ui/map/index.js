@@ -88,7 +88,7 @@ module.exports = function (context, readonly) {
 
   function map() {
     mapboxgl.accessToken =
-      'pk.eyJ1Ijoic3ZjLW9rdGEtbWFwYm94LXN0YWZmLWFjY2VzcyIsImEiOiJjbG5sMnExa3kxNTJtMmtsODJld24yNGJlIn0.RQ4CHchAYPJQZSiUJ0O3VQ';
+      'pk.eyJ1Ijoic29oaWw0OTMyIiwiYSI6ImNpdm1na2lwbzBhb3Uyemx2aGUzc2VuOGYifQ.KMuyFX13YXwqYSEDPDUGxg';
 
     mapboxgl.setRTLTextPlugin(
       'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
@@ -347,7 +347,21 @@ module.exports = function (context, readonly) {
             ]
           });
         }
-
+        context.map.addSource('raster-tiles', {
+          type: 'raster',
+          tiles: [
+            'https://api.maptiler.com/tiles/aa13e767-9b38-40ac-88d7-24c506ba6caa/{z}/{x}/{y}.png?key=VkJVPn98FXJHAc0EJc5f'
+          ],
+          tileSize: 256
+        });
+        context.map.addLayer({
+          id: 'raster-layer',
+          type: 'raster',
+          source: 'raster-tiles',
+          minzoom: 10,
+          maxzoom: 22
+        });
+        context.map.setPaintProperty('raster-layer', 'raster-opacity', 1);
         context.map.addSource('map-data', {
           type: 'geojson',
           data: dummyGeojson
@@ -359,7 +373,7 @@ module.exports = function (context, readonly) {
           source: 'map-data',
           paint: {
             'fill-color': ['coalesce', ['get', 'fill'], color],
-            'fill-opacity': ['coalesce', ['get', 'fill-opacity'], 0.3]
+            'fill-opacity': ['coalesce', ['get', 'fill-opacity'], 1]
           },
           filter: ['==', ['geometry-type'], 'Polygon']
         });
