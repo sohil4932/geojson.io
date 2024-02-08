@@ -350,7 +350,7 @@ module.exports = function (context, readonly) {
         context.map.addSource('raster-tiles', {
           type: 'raster',
           tiles: [
-            'https://api.maptiler.com/tiles/aa13e767-9b38-40ac-88d7-24c506ba6caa/{z}/{x}/{y}.png?key=VkJVPn98FXJHAc0EJc5f'
+            'https://s3-ap-south-1.amazonaws.com/tpmap-dholera/RAVGlobalMaster/{z}/{x}/{y}.png'
           ],
           tileSize: 256
         });
